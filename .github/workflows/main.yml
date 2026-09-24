@@ -1,4 +1,4 @@
-- name: Install dependencies
+- name: Android
   run: pnpm install --frozen-lockfile
 
 - name: Install Capacitor
