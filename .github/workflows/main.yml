@@ -1,5 +1,6 @@
 - name: Install dependencies
-  run: pnpm install --frozen-lockfile
+  run: pnpm install 
+  --frozen-lockfile
 
 - name: Install Capacitor
   run: pnpm add @capacitor/core @capacitor/android
