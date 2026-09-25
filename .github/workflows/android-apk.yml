@@ -1,4 +1,4 @@
-name: Anton Service POS Test
+name: Anton Service POS
 
 on:
   workflow_dispatch:
