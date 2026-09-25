@@ -17,23 +17,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 10.4.1
+
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: pnpm
 
-      - name: Enable pnpm
+      - name: Verify tools
         run: |
-          corepack enable
-          corepack prepare pnpm@10.4.1 --activate
+          node --version
           pnpm --version
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
       - name: Install Capacitor
-        run: pnpm add -D @capacitor/cli@latest @capacitor/core@latest @capacitor/android@latest
+        run: pnpm add -D @capacitor/cli @capacitor/core @capacitor/android
 
       - name: Build web app
         run: pnpm build
@@ -65,7 +69,7 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Build debug APK
+      - name: Build APK
         working-directory: android
         run: |
           chmod +x gradlew
