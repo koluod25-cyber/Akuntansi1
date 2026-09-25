@@ -34,19 +34,19 @@ jobs:
           pnpm --version
 
       - name: Install dependencies
-  env:
-    CI: true
-    PNPM_HOME: /home/runner/.local/share/pnpm
-  run: |
-    pnpm config set registry https://registry.npmjs.org/
-    pnpm config set fetch-retries 5
-    pnpm config set fetch-retry-factor 2
-    pnpm config set fetch-retry-mintimeout 10000
-    pnpm config set fetch-retry-maxtimeout 120000
-    pnpm install --frozen-lockfile --reporter=append-only
+        env:
+          CI: true
+        run: |
+          pnpm config set registry https://registry.npmjs.org/
+          pnpm config set fetch-retries 5
+          pnpm config set fetch-retry-factor 2
+          pnpm config set fetch-retry-mintimeout 10000
+          pnpm config set fetch-retry-maxtimeout 120000
+          pnpm install --frozen-lockfile --reporter=append-only
 
       - name: Install Capacitor
-        run: pnpm add -D @capacitor/cli @capacitor/core @capacitor/android
+        run: |
+          pnpm add -D @capacitor/cli @capacitor/core @capacitor/android
 
       - name: Build web app
         run: pnpm build
