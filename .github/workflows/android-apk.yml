@@ -33,7 +33,7 @@ jobs:
           node --version
           pnpm --version
 
-            - name: Prepare dependencies
+       - name: Prepare dependencies
          run: |
           node -e "
           const fs = require('fs');
