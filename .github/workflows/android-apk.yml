@@ -33,6 +33,18 @@ jobs:
           node --version
           pnpm --version
 
+            - name: Prepare dependencies
+        run: |
+          node -e "
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          if (p.pnpm && p.pnpm.patchedDependencies) {
+            delete p.pnpm.patchedDependencies;
+          }
+          fs.writeFileSync('package.json', JSON.stringify(p, null, 2) + '\n');
+          "
+          rm -f pnpm-lock.yaml
+
       - name: Install dependencies
         env:
           CI: true
@@ -42,7 +54,7 @@ jobs:
           pnpm config set fetch-retry-factor 2
           pnpm config set fetch-retry-mintimeout 10000
           pnpm config set fetch-retry-maxtimeout 120000
-          pnpm install --frozen-lockfile --reporter=append-only
+          pnpm install --no-frozen-lockfile --reporter=append-only
 
       - name: Install Capacitor
         run: |
