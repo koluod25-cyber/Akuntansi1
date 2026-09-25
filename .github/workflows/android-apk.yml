@@ -36,6 +36,8 @@ jobs:
           cp _anton_source/pnpm-lock.yaml ./pnpm-lock.yaml
           cp _anton_source/tsconfig.json ./tsconfig.json
           cp _anton_source/tsconfig.node.json ./tsconfig.node.json
+          npm pkg delete packageManager
+          npm pkg delete pnpm
 
           cat > client/src/App.tsx <<'EOF'
           import Home from "./pages/Home";
